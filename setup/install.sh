@@ -47,4 +47,5 @@ cd ../
 unzip gns3-gui-2.0.3.zip
 cd gns3-gui-2.0.3
 
+eopkg it python3-qt
 python3 setup.py install
