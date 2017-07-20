@@ -49,3 +49,55 @@ cd gns3-gui-2.0.3
 
 eopkg it python3-qt
 python3 setup.py install
+
+
+# Set up Tap interface
+nmcli con add con-name tap0-con ifname tap0 type tun ipv4.ad
+dress 172.16.99.1/24 ipv4.method manual tun.mode 2
+nmcli -p con up tap0-con
+
+echo "#Enable IP Forwarding on boot
+net.ipv4.ip_forward=1" >> /usr/lib/sysctl.d/20-solus.conf
+
+
+DEFAULT_DEVICE=$(ip route | grep default | sed "s/.*dev \(.*\) proto .*/\1/" | head -n 1)
+
+
+iptables -t nat -A POSTROUTING -o $DEFAULT_DEVICE -j MASQUERADE
+
+iptables-save -c /etc/iptables.rules
+
+echo "
+if [ -x /usr/bin/logger ]; then
+            LOGGER=\"/usr/bin/logger -s -p daemon.info -t FirewallHandler\"
+        else
+                    LOGGER=echo
+                fi
+
+                case \"$2\" in
+                            up)
+                                                if [ ! -r /etc/iptables.rules ]; then
+                                                                            ${LOGGER} \"No iptables rules exist to restore.\"
+                                                                                                    return
+                                                                                                                    fi
+                                                                                                                                    if [ ! -x /sbin/iptables-restore ]; then
+                                                                                                                                                                ${LOGGER} \"No program exists to restore iptables rules.\"
+                                                                                                                                                                                        return
+                                                                                                                                                                                                        fi
+                                                                                                                                                                                                                        ${LOGGER} \"Restoring iptables rules\"
+                                                                                                                                                                                                                                        /sbin/iptables-restore -c < /etc/iptables.rules
+                                                                                                                                                                                                                                                        ;;
+                                                                                                                                                                                                                                                                down)
+                                                                                                                                                                                                                                                                                    if [ ! -x /sbin/iptables-save ]; then
+                                                                                                                                                                                                                                                                                                                ${LOGGER} \"No program exists to save iptables rules.\"
+                                                                                                                                                                                                                                                                                                                                        return
+                                                                                                                                                                                                                                                                                                                                                        fi
+                                                                                                                                                                                                                                                                                                                                                                        ${LOGGER} \"Saving iptables rules.\"
+                                                                                                                                                                                                                                                                                                                                                                                        /sbin/iptables-save -c > /etc/iptables.rules
+                                                                                                                                                                                                                                                                                                                                                                                                        ;;
+                                                                                                                                                                                                                                                                                                                                                                                                                *)
+                                                                                                                                                                                                                                                                                                                                                                                                                                    ;;
+                                                                                                                                                                                                                                                                                                                                                                                                                            esac" > /etc/NetworkManager/dispatcher.d/01firewall
+
+chmod +x /etc/NetworkManager/dispatcher.d/01firewall
+
