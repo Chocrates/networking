@@ -6,8 +6,8 @@ unzip GNS3-2.0.3.source.zip
 # Build dynamips
 unzip dynamips-0.2.16.zip
 cd dynamips-02.16/
-eopkg it -c system.devel
-eopkg it cmake libelf-devel libpcap-devel elfutils-devel
+eopkg it -y -c system.devel
+eopkg it -y cmake libelf-devel libpcap-devel elfutils-devel
 
 mkdir build && cd build
 make build && make install
@@ -35,7 +35,7 @@ cd ../../
 unzip gns3-server-2.0.3.zip
 cd gns3-server-2.0.3
 
-eopkg it python3-devel
+eopkg it -y python3-devel
 pip3 install --upgrade pip
 pip3 install setuptools
 pip3 install -r requirements.txt
@@ -47,7 +47,7 @@ cd ../
 unzip gns3-gui-2.0.3.zip
 cd gns3-gui-2.0.3
 
-eopkg it python3-qt
+eopkg it -y python3-qt
 python3 setup.py install
 
 
