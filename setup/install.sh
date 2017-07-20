@@ -16,14 +16,14 @@ cd ../../
 
 # Build ubridge
 unzip ubridge-0.9.11.zip
-cd unzip ubridge-0.9.11A
+cd unzip ubridge-0.9.11
 
 make && make install
 
 cd ../
 
 # Build vpcs
-unzip vpcs.-0.6.1.zipA
+unzip vpcs.-0.6.1.zip
 cd vpcs-0.6.1/src
 ./mk.sh
 
