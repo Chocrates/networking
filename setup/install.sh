@@ -23,7 +23,7 @@ make && make install
 cd ../
 
 # Build vpcs
-unzip vpcs.-0.6.1.zip
+unzip vpcs-0.6.1.zip
 cd vpcs-0.6.1/src
 ./mk.sh
 
