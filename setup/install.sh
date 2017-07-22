@@ -52,8 +52,7 @@ python3 setup.py install
 
 
 # Set up Tap interface
-nmcli con add con-name tap0-con ifname tap0 type tun ipv4.ad
-dress 172.16.99.1/24 ipv4.method manual tun.mode 2
+nmcli con add con-name tap0-con ifname tap0 type tun ipv4.address 172.16.99.1/24 ipv4.method manual tun.mode 2
 nmcli -p con up tap0-con
 
 echo "#Enable IP Forwarding on boot
