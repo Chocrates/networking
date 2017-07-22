@@ -10,13 +10,13 @@ eopkg it -y -c system.devel
 eopkg it -y cmake libelf-devel libpcap-devel elfutils-devel
 
 mkdir build && cd build
-make && make install
+cmake .. && make install
 
 cd ../../
 
 # Build ubridge
 unzip ubridge-0.9.11.zip
-cd unzip ubridge-0.9.11
+cd ubridge-0.9.11
 
 make && make install
 
@@ -47,7 +47,7 @@ cd ../
 unzip gns3-gui-2.0.3.zip
 cd gns3-gui-2.0.3
 
-eopkg it -y python3-qt
+eopkg it -y python3-qt5
 python3 setup.py install
 
 
