@@ -10,7 +10,7 @@ eopkg it -y -c system.devel
 eopkg it -y cmake libelf-devel libpcap-devel elfutils-devel
 
 mkdir build && cd build
-make build && make install
+make && make install
 
 cd ../../
 
