@@ -5,7 +5,7 @@ unzip GNS3-2.0.3.source.zip
 
 # Build dynamips
 unzip dynamips-0.2.16.zip
-cd dynamips-02.16/
+cd dynamips-0.2.16/
 eopkg it -y -c system.devel
 eopkg it -y cmake libelf-devel libpcap-devel elfutils-devel
 
