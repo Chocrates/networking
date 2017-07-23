@@ -63,7 +63,7 @@ echo "Preparing gns3-gui"
 unzip gns3-gui-2.0.3.zip
 cd gns3-gui-2.0.3
 
-echo "Instalilng gns3-gui build dependencies"
+echo "Installing gns3-gui build dependencies"
 eopkg it -y python3-qt5
 echo "Building gns3-gui"
 python3 setup.py install
@@ -80,7 +80,7 @@ echo "#Enable IP Forwarding on boot
 net.ipv4.ip_forward=1" >> /usr/lib/sysctl.d/20-solus.conf
 
 # Turn it on before reboot
-echo 1 > /proc/sys/net/ipv4/ip_forawrd
+echo 1 > /proc/sys/net/ipv4/ip_forward
 
 echo "Enable NAT"
 # Try to find the correct internet iface
