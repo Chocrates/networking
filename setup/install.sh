@@ -88,7 +88,7 @@ DEFAULT_DEVICE=$(ip route | grep default | sed "s/.*dev \(.*\) proto .*/\1/" | h
 # Enable nat on that  interface
 iptables -t nat -A POSTROUTING -o $DEFAULT_DEVICE -j MASQUERADE
 # Save the rules to a file for persistance
-iptables-save -c /etc/iptables.rules
+iptables-save -c > /etc/iptables.rules
 
 # Create a script to reload the rules on boot
 # Source: https://help.ubuntu.com/community/IptablesHowTo
